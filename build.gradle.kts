@@ -58,16 +58,12 @@ subprojects {
         testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
         testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     }
-}
 
-tasks.withType<Jar> {
-    enabled = true
-}
+    tasks.withType<Jar> {
+        enabled = true
+    }
 
-tasks.withType<BootJar> {
-    enabled = false
+    tasks.withType<BootJar> {
+        enabled = false
+    }
 }
-
-/*dependencies {
-    api("io.github.microutils:kotlin-logging-jvm:2.0.11")
-}*/
