@@ -1,4 +1,12 @@
-## Multi Module Design
+## 목차
+
+* [멀티 모듈 설계](#멀티-모듈-설계)
+* [ERD](#erd)
+* [시퀀스 다이어그램](#시퀀스-다이어그램)
+
+---
+
+## 멀티 모듈 설계
 
 ### movie-api
 - 클라이언트와의 인터페이스를 담당.
@@ -39,3 +47,14 @@
 
 ### User(사용자) & Reservation(예약) → 1 : N
 - 한 좌석에 대한 예약 내역은 반드시 하나지만, 한 명의 사용자가 여러 좌석을 예약할 수 있음.
+
+---
+
+## 시퀀스 다이어그램
+
+<details>
+<summary><b>영화 목록 조회</b></summary>
+
+![view_movie_list](docs/view_movie_list.png)
+
+</details>
