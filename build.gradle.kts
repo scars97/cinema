@@ -11,7 +11,7 @@ plugins {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
@@ -20,14 +20,14 @@ allprojects {
     version = "0.0.1-SNAPSHOT"
 
     tasks.withType<JavaCompile>{
-        sourceCompatibility = "21"
-        targetCompatibility = "21"
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
     }
 
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "21"
+            jvmTarget = "17"
         }
     }
 
@@ -56,6 +56,7 @@ subprojects {
 
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+        testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
         testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     }
 
