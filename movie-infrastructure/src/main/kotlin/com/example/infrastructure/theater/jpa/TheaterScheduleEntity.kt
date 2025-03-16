@@ -2,7 +2,6 @@ package com.example.infrastructure.theater.jpa
 
 import com.example.infrastructure.common.BaseEntity
 import com.example.infrastructure.movie.jpa.MovieEntity
-import com.example.infrastructure.theater.jpa.TheaterEntity
 import jakarta.persistence.*
 import java.time.LocalDate
 
