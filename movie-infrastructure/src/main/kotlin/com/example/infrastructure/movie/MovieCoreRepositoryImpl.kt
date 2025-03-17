@@ -13,7 +13,7 @@ class MovieCoreRepositoryImpl(
 ): MovieRepository {
 
     override fun findMoviesReleasedUntil(now: LocalDate): List<Movie> {
-        val movies = jpaRepository.findByReleaseDateLessThanEqual(now)
+        val movies = jpaRepository.findByReleaseDateLessThanEqualOrderByReleaseDateAsc(now)
 
         return movies.stream()
             .map { MovieMapper.toMovie(it) }

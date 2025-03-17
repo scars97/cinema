@@ -17,6 +17,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
 import java.time.LocalDate
+import java.time.LocalTime
 
 @ExtendWith(MockitoExtension::class)
 class MovieUseCaseTest {
@@ -57,16 +58,16 @@ class MovieUseCaseTest {
             movieId = 1L,
             theaterId = 1L,
             screeningDate = LocalDate.now(),
-            startTime = "12:00",
-            endTime = "14:00"
+            startTime = LocalTime.of(12, 0),
+            endTime = LocalTime.of(14, 0)
         )
         schedule2 = TheaterSchedule(
             scheduleId = 2L,
             movieId = 1L,
             theaterId = 1L,
             screeningDate = LocalDate.now(),
-            startTime = "14:00",
-            endTime = "16:00"
+            startTime = LocalTime.of(14, 0),
+            endTime = LocalTime.of(16, 0)
         )
     }
 
@@ -89,10 +90,10 @@ class MovieUseCaseTest {
             .extracting("theaterId", "name")
             .containsExactly(tuple(1L, "A관"))
         assertThat(result[0].theaterSchedules).hasSize(2)
-            .extracting("scheduleId", "movieId", "theaterId")
+            .extracting("scheduleId", "movieId", "theaterId", "startTime")
             .containsExactly(
-                tuple(1L, 1L, 1L),
-                tuple(2L, 1L, 1L)
+                tuple(1L, 1L, 1L, LocalTime.of(12, 0)),
+                tuple(2L, 1L, 1L, LocalTime.of(14, 0))
             )
     }
 

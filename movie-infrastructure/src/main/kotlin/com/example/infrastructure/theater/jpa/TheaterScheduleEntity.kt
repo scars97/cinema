@@ -4,6 +4,7 @@ import com.example.infrastructure.common.BaseEntity
 import com.example.infrastructure.movie.jpa.MovieEntity
 import jakarta.persistence.*
 import java.time.LocalDate
+import java.time.LocalTime
 
 @Entity
 class TheaterScheduleEntity (
@@ -14,9 +15,9 @@ class TheaterScheduleEntity (
 
     val screeningDate: LocalDate,
 
-    val startTime: String,
+    val startTime: LocalTime,
 
-    val endTime: String,
+    val endTime: LocalTime,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", nullable = false, foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT))

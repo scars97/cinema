@@ -5,6 +5,6 @@ import java.time.LocalDate
 
 interface MovieJpaRepository: JpaRepository<MovieEntity, Long> {
 
-    fun findByReleaseDateLessThanEqual(now: LocalDate): List<MovieEntity>
+    fun findByReleaseDateLessThanEqualOrderByReleaseDateAsc(now: LocalDate): List<MovieEntity>
 
 }

@@ -12,7 +12,7 @@ class TheaterScheduleCoreRepositoryImpl(
 ): TheaterScheduleRepository {
 
     override fun getScheduleByMovieIds(movieIds: List<Long>): List<TheaterSchedule> {
-        val schedules = jpaRepository.findByMovieIdIn(movieIds)
+        val schedules = jpaRepository.findByMovieIdInOrderByStartTimeAsc(movieIds)
 
         return schedules.stream()
             .map { TheaterMapper.toSchedule(it) }

@@ -13,6 +13,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
 import java.time.LocalDate
+import java.time.LocalTime
 
 @ExtendWith(MockitoExtension::class)
 class TheaterScheduleServiceTest {
@@ -48,8 +49,8 @@ class TheaterScheduleServiceTest {
             movieId = 1L,
             theaterId = 1L,
             screeningDate = LocalDate.now(),
-            startTime = "14:00",
-            endTime = "16:00"
+            startTime = LocalTime.of(14, 0),
+            endTime = LocalTime.of(16, 0)
         )
 
         `when`(scheduleRepository.getScheduleByMovieIds(listOf(movie.movieId)))
@@ -60,9 +61,9 @@ class TheaterScheduleServiceTest {
 
         // then
         assertThat(result).hasSize(1)
-            .extracting("scheduleId", "movieId", "screeningDate")
+            .extracting("scheduleId", "movieId", "screeningDate", "startTime")
             .containsExactly(
-                tuple(1L, 1L, LocalDate.now())
+                tuple(1L, 1L, LocalDate.now(), LocalTime.of(14, 0))
             )
     }
 }
