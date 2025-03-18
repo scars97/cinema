@@ -1,6 +1,5 @@
 rootProject.name = "movie-multi-module"
 
-include("movie-api")
+include("movie-application")
 include("movie-business")
 include("movie-infrastructure")
-include("movie-application")
