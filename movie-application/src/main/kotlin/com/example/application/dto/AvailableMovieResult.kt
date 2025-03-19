@@ -3,7 +3,6 @@ package com.example.application.dto
 import com.example.business.movie.domain.Movie
 import com.example.business.theater.domain.Theater
 import com.example.business.theater.domain.TheaterSchedule
-import java.time.LocalDate
 
 data class AvailableMovieResult(
     val movie: MovieResult,
