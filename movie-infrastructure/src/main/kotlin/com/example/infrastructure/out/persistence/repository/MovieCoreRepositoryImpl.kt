@@ -12,7 +12,7 @@ class MovieCoreRepositoryImpl(
     private val jpaRepository: MovieJpaRepository
 ): MovieRepository {
 
-    override fun findMoviesReleasedUntil(now: LocalDate): List<Movie> {
+    override fun getMoviesReleasedUntil(now: LocalDate): List<Movie> {
         val movies = jpaRepository.findByReleaseDateLessThanEqualOrderByReleaseDateAsc(now)
 
         return movies.stream()
