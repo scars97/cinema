@@ -32,7 +32,7 @@
 - 작성자,수정자,작성일,수정일 컬럼은 실제 테이블에 추가됩니다. <br> 가독성을 위해 ERD 상에서만 제외했습니다.
 - 테이블 간의 느슨한 결합을 위해 논리적 FK만 맺도록 했습니다.
 
-![cinema_erd](docs/erd.png)
+![cinema_erd](docs/design/erd.png)
 
 ### Movie(영화) & Theater(상영관) → N : N
 - Theater-Schedule 을 두어 1:N 으로 풀어냄.
@@ -55,6 +55,6 @@
 <details>
 <summary><b>영화 목록 조회</b></summary>
 
-![view_movie_list](docs/view_movie_list.png)
+![view_movie_list](docs/design/view_movie_list.png)
 
 </details>
