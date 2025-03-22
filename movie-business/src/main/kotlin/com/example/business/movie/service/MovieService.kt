@@ -9,7 +9,7 @@ import java.time.LocalDate
 class MovieService(
     private val movieRepository: MovieRepository
 ) {
-    fun getAvailableMovies() : List<Movie> {
-        return movieRepository.getMoviesReleasedUntil(LocalDate.now())
+    fun getAvailableMovies(title: String?, genre: String?) : List<Movie> {
+        return movieRepository.getMoviesReleasedUntil(title, genre)
     }
 }

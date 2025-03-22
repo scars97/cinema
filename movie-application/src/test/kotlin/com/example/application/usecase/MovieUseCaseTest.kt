@@ -50,12 +50,15 @@ class MovieUseCaseTest {
         val schedule1 = fixture.createSchedule(1L, 1L, 1L, LocalTime.of(12,0), LocalTime.of(14, 0))
         val schedule2 = fixture.createSchedule(2L, 1L, 1L, LocalTime.of(14,0), LocalTime.of(16, 0))
 
-        `when`(movieService.getAvailableMovies()).thenReturn(listOf(movie))
+        val title: String? = null
+        val genre: String? = null
+
+        `when`(movieService.getAvailableMovies(title, genre)).thenReturn(listOf(movie))
         `when`(scheduleService.getSchedules(listOf(movie))).thenReturn(listOf(schedule1, schedule2))
         `when`(theaterService.getTheaters(setOf(schedule1.theaterId, schedule2.theaterId))).thenReturn(listOf(theater))
 
         // when
-        val result = sut.getAvailableMovies()
+        val result = sut.getAvailableMovies(title, genre)
 
         // then
         assertThat(result[0].movie)

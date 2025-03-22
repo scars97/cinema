@@ -1,16 +1,13 @@
 package com.example.infrastructure
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.boot.runApplication
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 
-// @EntityScan(basePackages = ["com.example.infrastructure"])
-// @EnableJpaRepositories(basePackages = ["com.example.infrastructure"])
 @SpringBootApplication(scanBasePackages = [
     "com.example.application",
     "com.example.business",
-    "com.example.infrastructure"
+    "com.example.infrastructure",
+    "com.example.common",
 ])
 class MovieApplication
 
