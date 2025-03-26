@@ -4,6 +4,7 @@
 * [멀티 모듈 설계](#멀티-모듈-설계)
 * [ERD](#erd)
 * [시퀀스 다이어그램](#시퀀스-다이어그램)
+* [트러블 슈팅](#트러블-슈팅)
 
 ## Architecture
 - **Clean + Layered**
@@ -56,5 +57,13 @@
 <summary><b>영화 목록 조회</b></summary>
 
 ![view_movie_list](docs/design/view_movie_list.png)
-
 </details>
+<details>
+<summary><b>영화 좌석 예약</b></summary>
+
+![seat_reservation](docs/design/seat_reservation.png)
+</details>
+
+## 트러블 슈팅
+- [영화 조회 시 N + 1 문제 발생](docs/troubleshoot/n_plus_one.md)
+- [JPA 연관관계 설정에 대한 의문](docs/troubleshoot/JPA_연관관계_설정에_대한_의문.md)
