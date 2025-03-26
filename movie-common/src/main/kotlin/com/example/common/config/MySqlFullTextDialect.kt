@@ -1,4 +1,4 @@
-package com.example.infrastructure.out.config
+package com.example.common.config
 
 import org.hibernate.boot.model.FunctionContributions
 import org.hibernate.dialect.MySQLDialect
@@ -39,4 +39,5 @@ open class MySqlFullTextDialect: MySQLDialect() {
             sqlAppender.appendSql(" IN NATURAL LANGUAGE MODE)")
         }
     }
+
 }
