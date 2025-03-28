@@ -13,4 +13,7 @@ dependencies {
 
     // Mysql
     runtimeOnly("com.mysql:mysql-connector-j")
+
+    // TestContainer
+    testImplementation ("org.testcontainers:mysql")
 }
