@@ -8,9 +8,7 @@ data class BindErrorResponse(
     val reason: Map<String, String> = mapOf()
 ) {
     companion object {
-        fun of(
-            status: HttpStatus, reason: Map<String, String>
-        ): ResponseEntity<BindErrorResponse> {
+        fun of(status: HttpStatus, reason: Map<String, String>): ResponseEntity<BindErrorResponse> {
             return ResponseEntity.status(status).body(BindErrorResponse(status, reason))
         }
     }

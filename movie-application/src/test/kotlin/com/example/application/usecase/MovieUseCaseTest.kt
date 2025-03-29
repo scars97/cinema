@@ -1,10 +1,7 @@
 package com.example.application.usecase
 
 import com.example.application.fixture.MovieUseCaseFixture
-import com.example.business.movie.domain.Movie
 import com.example.business.movie.service.MovieService
-import com.example.business.theater.domain.Theater
-import com.example.business.theater.domain.TheaterSchedule
 import com.example.business.theater.service.TheaterScheduleService
 import com.example.business.theater.service.TheaterService
 import org.assertj.core.api.Assertions.*
