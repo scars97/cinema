@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import org.redisson.Redisson
+import org.redisson.api.RedissonClient
+import org.redisson.config.Config
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.cache.CacheManager
 import org.springframework.cache.annotation.EnableCaching
@@ -22,7 +25,7 @@ import java.time.Duration
 
 @Configuration
 @EnableCaching
-class RedisCacheConfig(
+class RedisConfig(
     @Value("\${spring.data.redis.host}")
     val host: String,
     @Value("\${spring.data.redis.port}")
@@ -31,6 +34,13 @@ class RedisCacheConfig(
 
     @Bean
     fun redisConnectionFactory(): RedisConnectionFactory = LettuceConnectionFactory(host, port)
+
+    @Bean
+    fun redissonClient(): RedissonClient {
+        val config = Config()
+        config.useSingleServer().setAddress("redis://$host:$port")
+        return Redisson.create(config)
+    }
 
     @Bean
     fun cacheManager(redisConnectionFactory: RedisConnectionFactory): CacheManager {
