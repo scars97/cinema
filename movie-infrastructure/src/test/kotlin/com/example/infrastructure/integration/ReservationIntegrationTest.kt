@@ -80,6 +80,7 @@ class ReservationIntegrationTest @Autowired constructor(
             .isInstanceOf(BusinessException::class.java)
             .hasFieldOrPropertyWithValue("errorCode", ErrorCode.ALREADY_RESERVED)
 
+        // then
         val findAll = reservationJpaRepository.findAll()
         assertThat(findAll.size).isZero()
     }
@@ -97,6 +98,7 @@ class ReservationIntegrationTest @Autowired constructor(
             seatJpaRepository.save(SeatEntity("A".plus(i), SeatStatus.AVAILABLE, null, schedule.id))
         }
 
+        // when
         val tasks = (1..totalUsers).map { userId ->
             CompletableFuture.runAsync {
                 try {
@@ -109,6 +111,7 @@ class ReservationIntegrationTest @Autowired constructor(
 
         CompletableFuture.allOf(*tasks.toTypedArray()).join()
 
+        // then
         val reservations = reservationJpaRepository.findAll()
         assertThat(reservations.size).isOne()
 
