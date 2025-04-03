@@ -21,7 +21,7 @@ class ReservationUseCase(
     private val eventPublisher: ApplicationEventPublisher
 ) {
 
-    @DistributedLock(key = "'reserve-' + #info.scheduleId")
+    //@DistributedLock(key = "'reserve-' + #info.scheduleId")
     @Transactional
     fun createReservation(info: ReservationInfo): ReservationResult {
         validator.validate(info)

@@ -28,4 +28,7 @@ class SeatEntity (
     constructor(seatNumber: String, status: SeatStatus, reservationId: Long?, scheduleId: Long) :
             this(0, seatNumber, status, reservationId, scheduleId, 0)
 
+    constructor(id:Long, seatNumber: String, status: SeatStatus, reservationId: Long?, scheduleId: Long) :
+            this(id, seatNumber, status, reservationId, scheduleId, 0)
+
 }

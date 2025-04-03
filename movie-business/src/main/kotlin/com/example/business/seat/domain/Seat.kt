@@ -8,8 +8,7 @@ data class Seat(
     val seatNumber: String,
     var status: SeatStatus,
     var reservationId: Long?,
-    val scheduleId: Long,
-    var version: Long = 0L
+    val scheduleId: Long
 ) {
 
     fun reserveBy(reservationId: Long) {

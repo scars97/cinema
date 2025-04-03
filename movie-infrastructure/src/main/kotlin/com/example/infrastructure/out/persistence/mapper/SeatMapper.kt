@@ -12,8 +12,7 @@ class SeatMapper {
                 seatNumber = entity.seatNumber,
                 status = entity.status,
                 reservationId = entity.reservationId,
-                scheduleId = entity.scheduleId,
-                version = entity.version
+                scheduleId = entity.scheduleId
             )
         }
 
@@ -23,8 +22,7 @@ class SeatMapper {
                 seatNumber = seat.seatNumber,
                 status = seat.status,
                 reservationId = seat.reservationId,
-                scheduleId = seat.scheduleId,
-                version = seat.version
+                scheduleId = seat.scheduleId
             )
         }
     }
