@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test
 import java.time.Duration
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicInteger
 
 class Bucket4jRateLimiterTest {
 
@@ -39,9 +40,10 @@ class Bucket4jRateLimiterTest {
         }
     }
 
-    @DisplayName("55번의 요청 중, 50번 요청은 성공하고 5번 요청은 실패한다.")
+    @DisplayName("동시에 55번 요청하는 경우, 50번은 성공하고 5번은 실패한다.")
     @Test
-    fun given55RequestsThen50SuccessfulAnd5Failed() {
+    fun when55RequestsAtTheSameTimeThen50SucceedAnd5Failed() {
+        // given
         val requestLimit = 50L
         val bucket = Bucket.builder()
             .addLimit { limit ->
@@ -50,18 +52,29 @@ class Bucket4jRateLimiterTest {
             }
             .build()
 
-        var successCount = 0
-        var failureCount = 0
-        repeat(55) {
-            if (bucket.tryConsume(1)) {
-                successCount++
-            } else {
-                failureCount++
+        val successCount = AtomicInteger(0)
+        val failureCount = AtomicInteger(0)
+
+        // when
+        val futures = (1..55).map {
+            CompletableFuture.runAsync {
+                try {
+                    if (bucket.tryConsume(1)) {
+                        successCount.incrementAndGet()
+                    } else {
+                        failureCount.incrementAndGet()
+                    }
+                } catch (e: Exception) {
+                    failureCount.incrementAndGet()
+                }
             }
         }
 
-        assertThat(successCount).isEqualTo(requestLimit)
-        assertThat(failureCount).isEqualTo(5)
+        CompletableFuture.allOf(*futures.toTypedArray()).join()
+
+        // then
+        assertThat(successCount.get()).isEqualTo(requestLimit)
+        assertThat(failureCount.get()).isEqualTo(5)
     }
 
 }
