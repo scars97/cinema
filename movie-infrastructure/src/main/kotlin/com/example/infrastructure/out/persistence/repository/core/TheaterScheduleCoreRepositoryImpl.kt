@@ -1,8 +1,9 @@
-package com.example.infrastructure.out.persistence.repository
+package com.example.infrastructure.out.persistence.repository.core
 
 import com.example.business.theater.domain.TheaterSchedule
 import com.example.business.theater.repository.TheaterScheduleRepository
 import com.example.infrastructure.out.persistence.mapper.TheaterScheduleMapper
+import com.example.infrastructure.out.persistence.repository.jpa.TheaterScheduleJpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository

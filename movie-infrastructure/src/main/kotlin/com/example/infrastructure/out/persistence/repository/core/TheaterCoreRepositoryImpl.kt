@@ -1,9 +1,9 @@
-package com.example.infrastructure.out.persistence.repository
+package com.example.infrastructure.out.persistence.repository.core
 
 import com.example.business.theater.domain.Theater
 import com.example.business.theater.repository.TheaterRepository
 import com.example.infrastructure.out.persistence.mapper.TheaterMapper
-import com.example.infrastructure.out.persistence.repository.TheaterJpaRepository
+import com.example.infrastructure.out.persistence.repository.jpa.TheaterJpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository

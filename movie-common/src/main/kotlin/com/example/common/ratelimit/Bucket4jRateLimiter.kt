@@ -1,5 +1,6 @@
 package com.example.common.ratelimit
 
+import com.example.common.annotation.LimitRequestPerTime
 import io.github.bucket4j.Bucket
 import org.springframework.stereotype.Component
 import java.time.Duration

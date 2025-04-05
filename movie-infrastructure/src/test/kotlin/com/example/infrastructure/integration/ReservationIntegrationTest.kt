@@ -9,10 +9,10 @@ import com.example.infrastructure.config.IntegrationTestSupport
 import com.example.infrastructure.out.persistence.entity.SeatEntity
 import com.example.infrastructure.out.persistence.entity.TheaterScheduleEntity
 import com.example.infrastructure.out.persistence.entity.UserEntity
-import com.example.infrastructure.out.persistence.repository.ReservationJpaRepository
-import com.example.infrastructure.out.persistence.repository.SeatJpaRepository
-import com.example.infrastructure.out.persistence.repository.TheaterScheduleJpaRepository
-import com.example.infrastructure.out.persistence.repository.UserJpaRepository
+import com.example.infrastructure.out.persistence.repository.jpa.ReservationJpaRepository
+import com.example.infrastructure.out.persistence.repository.jpa.SeatJpaRepository
+import com.example.infrastructure.out.persistence.repository.jpa.TheaterScheduleJpaRepository
+import com.example.infrastructure.out.persistence.repository.jpa.UserJpaRepository
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -21,9 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.concurrent.CompletableFuture
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.Executors
-import java.util.concurrent.atomic.AtomicInteger
 
 class ReservationIntegrationTest @Autowired constructor(
     private val sut: ReservationUseCase,

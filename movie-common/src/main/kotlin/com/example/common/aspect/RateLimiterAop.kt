@@ -1,6 +1,8 @@
-package com.example.common.ratelimit
+package com.example.common.aspect
 
+import com.example.common.annotation.LimitRequestPerTime
 import com.example.common.exception.RateLimitException
+import com.example.common.ratelimit.RateLimiter
 import com.example.common.util.CustomSpringELParser
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
@@ -15,7 +17,7 @@ class RateLimiterAop(
     @Qualifier("RedisRateLimiter") private val rateLimiter: RateLimiter
 ) {
 
-    @Around("@annotation(com.example.common.ratelimit.LimitRequestPerTime)")
+    @Around("@annotation(com.example.common.annotation.LimitRequestPerTime)")
     @Throws(Throwable::class)
     fun rateLimit(joinPoint: ProceedingJoinPoint) {
         val limitRequestPerTime = getAnnotationInfo(joinPoint)

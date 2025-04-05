@@ -1,8 +1,9 @@
-package com.example.infrastructure.out.persistence.repository
+package com.example.infrastructure.out.persistence.repository.core
 
 import com.example.business.seat.domain.Seat
 import com.example.business.seat.repository.SeatRepository
 import com.example.infrastructure.out.persistence.mapper.SeatMapper
+import com.example.infrastructure.out.persistence.repository.jpa.SeatJpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository

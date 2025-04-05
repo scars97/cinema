@@ -1,5 +1,6 @@
 package com.example.common.ratelimit
 
+import com.example.common.annotation.LimitRequestPerTime
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Component
 

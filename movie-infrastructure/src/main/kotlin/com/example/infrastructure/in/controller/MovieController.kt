@@ -1,7 +1,7 @@
 package com.example.infrastructure.`in`.controller
 
 import com.example.application.usecase.MovieUseCase
-import com.example.common.ratelimit.LimitRequestPerTime
+import com.example.common.annotation.LimitRequestPerTime
 import com.example.infrastructure.`in`.dto.AvailableMovieResponse
 import com.example.infrastructure.`in`.dto.MovieSearchRequest
 import jakarta.servlet.http.HttpServletRequest

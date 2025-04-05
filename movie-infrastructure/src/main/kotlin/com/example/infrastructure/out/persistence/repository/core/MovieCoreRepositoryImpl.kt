@@ -1,4 +1,4 @@
-package com.example.infrastructure.out.persistence.repository
+package com.example.infrastructure.out.persistence.repository.core
 
 import com.example.business.movie.domain.Movie
 import com.example.business.movie.repository.MovieRepository

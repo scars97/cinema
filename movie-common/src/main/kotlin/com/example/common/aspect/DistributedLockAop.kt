@@ -1,5 +1,6 @@
-package com.example.common.lock
+package com.example.common.aspect
 
+import com.example.common.annotation.DistributedLock
 import com.example.common.util.CustomSpringELParser
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
@@ -24,7 +25,7 @@ class DistributedLockAop(
         const val REDISSON_LOCK_PREFIX = "LOCK:"
     }
 
-    @Around("@annotation(com.example.common.lock.DistributedLock)")
+    @Around("@annotation(com.example.common.annotation.DistributedLock)")
     @Throws(Throwable::class)
     fun lock(joinPoint: ProceedingJoinPoint): Any {
         val signature = joinPoint.signature as MethodSignature

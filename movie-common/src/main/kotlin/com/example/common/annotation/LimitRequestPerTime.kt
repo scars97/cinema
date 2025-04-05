@@ -1,4 +1,4 @@
-package com.example.common.ratelimit
+package com.example.common.annotation
 
 import java.util.concurrent.TimeUnit
 
