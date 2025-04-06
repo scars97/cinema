@@ -7,9 +7,12 @@ import com.example.application.validator.ReservationValidator
 import com.example.business.reservation.domain.Reservation
 import com.example.business.reservation.service.ReservationService
 import com.example.business.seat.service.SeatService
+import com.example.common.annotation.DistributedLock
+import com.example.common.annotation.LimitRequestPerTime
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
+import java.util.concurrent.TimeUnit
 
 @Component
 class ReservationUseCase(
@@ -19,7 +22,7 @@ class ReservationUseCase(
     private val eventPublisher: ApplicationEventPublisher
 ) {
 
-    //@DistributedLock(key = "'reserve-' + #info.scheduleId")
+    @DistributedLock(key = "'reserve-' + #info.scheduleId")
     @Transactional
     fun createReservation(info: ReservationInfo): ReservationResult {
         validator.validate(info)
