@@ -44,7 +44,6 @@ class ReservationValidatorTest {
         assertThatThrownBy { sut.validate(info) }
             .isInstanceOf(BusinessException::class.java)
             .hasFieldOrPropertyWithValue("errorCode", ErrorCode.SCHEDULE_NOT_FOUND)
-            .hasMessage("존재하지 않는 상영 일정 ID: ${info.scheduleId}")
     }
 
 }

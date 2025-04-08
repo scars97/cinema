@@ -26,13 +26,11 @@ class SeatTest {
                 Assertions.assertThatThrownBy { statusIsReserved.reserveBy(reservationId) }
                     .isInstanceOf(BusinessException::class.java)
                     .hasFieldOrPropertyWithValue("errorCode", ErrorCode.ALREADY_RESERVED)
-                    .hasMessage("예약된 좌석입니다.")
             },
             DynamicTest.dynamicTest("예약 ID 가 존재하는 경우 예외가 발생한다.") {
                 Assertions.assertThatThrownBy { reservationIsNotNull.reserveBy(reservationId) }
                     .isInstanceOf(BusinessException::class.java)
                     .hasFieldOrPropertyWithValue("errorCode", ErrorCode.ALREADY_RESERVED)
-                    .hasMessage("예약된 좌석입니다.")
             }
         )
     }

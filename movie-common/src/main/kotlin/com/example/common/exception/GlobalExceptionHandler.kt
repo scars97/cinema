@@ -29,15 +29,15 @@ class GlobalExceptionHandler {
     fun businessExceptionHandler(e: BusinessException): ResponseEntity<ErrorResponse> {
         log.error("${e.errorCode} - ${e.message}")
 
-        return ErrorResponse.of(e.errorCode, e.message)
+        return ErrorResponse.of(e.errorCode)
     }
 
-    @ExceptionHandler(RateLimitException::class)
-    fun rateLimitExceptionHandler(e: RateLimitException): ResponseEntity<ErrorResponse> {
-        val status = HttpStatus.TOO_MANY_REQUESTS
-        log.error("${e.methodName} - $status")
+    @ExceptionHandler(RateLimitExceedException::class)
+    fun rateLimitExceptionHandler(e: RateLimitExceedException): ResponseEntity<ErrorResponse> {
+        val errorCode = ErrorCode.REQUEST_EXCEED_LIMIT
+        log.error("${e.methodName} - $errorCode")
 
-        return ErrorResponse.of(status, e.message)
+        return ErrorResponse.of(errorCode)
     }
 
 }

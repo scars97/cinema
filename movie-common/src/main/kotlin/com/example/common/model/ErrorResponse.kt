@@ -10,16 +10,10 @@ data class ErrorResponse(
 ) {
 
     companion object {
-        fun of(errorCode: ErrorCode, message: String?): ResponseEntity<ErrorResponse> {
+        fun of(errorCode: ErrorCode): ResponseEntity<ErrorResponse> {
             return ResponseEntity
                 .status(errorCode.status)
-                .body(ErrorResponse(errorCode.status, message))
-        }
-
-        fun of(status: HttpStatus, message: String?): ResponseEntity<ErrorResponse> {
-            return ResponseEntity
-                .status(status)
-                .body(ErrorResponse(status, message))
+                .body(ErrorResponse(errorCode.status, errorCode.message))
         }
     }
 

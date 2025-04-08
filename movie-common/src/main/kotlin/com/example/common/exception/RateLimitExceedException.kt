@@ -1,6 +1,6 @@
 package com.example.common.exception
 
-class BusinessException(
-    val errorCode: ErrorCode
+class RateLimitExceedException(
+    val methodName: String
 ): RuntimeException() {
 }

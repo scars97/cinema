@@ -13,7 +13,7 @@ data class Seat(
 
     fun reserveBy(reservationId: Long) {
         if (this.status != SeatStatus.AVAILABLE || this.reservationId != null) {
-            throw BusinessException(ErrorCode.ALREADY_RESERVED, "예약된 좌석입니다.")
+            throw BusinessException(ErrorCode.ALREADY_RESERVED)
         }
 
         this.status = SeatStatus.RESERVED

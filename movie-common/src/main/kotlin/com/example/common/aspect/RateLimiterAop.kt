@@ -1,7 +1,7 @@
 package com.example.common.aspect
 
 import com.example.common.annotation.LimitRequestPerTime
-import com.example.common.exception.RateLimitException
+import com.example.common.exception.RateLimitExceedException
 import com.example.common.ratelimit.RateLimiter
 import com.example.common.util.CustomSpringELParser
 import org.aspectj.lang.ProceedingJoinPoint
@@ -25,7 +25,7 @@ class RateLimiterAop(
         val key = "RATE-LIMIT:" + getKey(joinPoint, limitRequestPerTime)
 
         if (!rateLimiter.tryCall(key, limitRequestPerTime)) {
-            throw RateLimitException(getMethodName(joinPoint))
+            throw RateLimitExceedException(getMethodName(joinPoint))
         }
 
         joinPoint.proceed()
