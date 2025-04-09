@@ -17,7 +17,11 @@ class MovieUseCase(
     private val scheduleService: TheaterScheduleService
 ){
 
-    @Cacheable(value = ["available-movies"], key = "'movie-list'")
+    @Cacheable(
+        value = ["available-movies"],
+        key = "'movie-list'",
+        condition = "#title == null and #genre == null"
+    )
     fun getAvailableMovies(title: String?, genre: String?): List<AvailableMovieResult> {
         // 상영 가능한 영화 목록 조회
         val availableMovies: List<Movie> = movieService.getAvailableMovies(title, genre)
