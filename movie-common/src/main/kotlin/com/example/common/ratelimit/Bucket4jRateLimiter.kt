@@ -1,6 +1,7 @@
 package com.example.common.ratelimit
 
 import com.example.common.annotation.LimitRequestPerTime
+import com.example.common.model.RateLimitResponse
 import io.github.bucket4j.Bucket
 import org.springframework.stereotype.Component
 import java.time.Duration
@@ -12,10 +13,14 @@ class Bucket4jRateLimiter: RateLimiter {
 
     private val cache = ConcurrentHashMap<String, Bucket>()
 
-    override fun tryCall(key: String, limitRequestPerTime: LimitRequestPerTime): Boolean {
+    override fun tryCall(key: String, limitRequestPerTime: LimitRequestPerTime): RateLimitResponse {
         val bucket = resolveBucket(key, limitRequestPerTime)
 
-        return bucket.tryConsume(1)
+        return RateLimitResponse(
+            bucket.tryConsume(1),
+            limitRequestPerTime.limitCount,
+            bucket.availableTokens
+        )
     }
 
     private fun resolveBucket(key: String, limitRequestPerTime: LimitRequestPerTime): Bucket {
@@ -23,7 +28,7 @@ class Bucket4jRateLimiter: RateLimiter {
             Bucket.builder()
                 .addLimit { limit ->
                     limit.capacity(limitRequestPerTime.limitCount)
-                        .refillGreedy(
+                        .refillIntervally( // 1분마다 토큰 채움
                             limitRequestPerTime.limitCount,
                             toDuration(limitRequestPerTime.ttl, limitRequestPerTime.ttlTimeUnit)
                         )
