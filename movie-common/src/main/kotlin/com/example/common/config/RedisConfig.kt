@@ -1,5 +1,6 @@
 package com.example.common.config
 
+import com.example.common.model.RateLimitResponse
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator
@@ -55,9 +56,9 @@ class RedisConfig(
     }
 
     @Bean
-    fun rateLimitScript(): RedisScript<Boolean> {
+    fun rateLimitScript(): RedisScript<List<*>> {
         val script = ClassPathResource("luascript/ratelimit.lua")
-        return RedisScript.of(script, Boolean::class.java)
+        return RedisScript.of(script, List::class.java)
     }
 
     @Bean
