@@ -4,6 +4,8 @@ import com.example.common.annotation.LimitRequestPerTime
 import com.example.common.model.RateLimitResponse
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Component
+import java.time.LocalDateTime
+import java.util.concurrent.TimeUnit
 
 @Component("RedisRateLimiter")
 class RedisRateLimiter(
@@ -13,11 +15,20 @@ class RedisRateLimiter(
     override fun tryCall(key: String, limitRequestPerTime: LimitRequestPerTime): RateLimitResponse {
         val previousCount = (redisTemplate.opsForValue().get(key) as? Number)?.toLong()
 
-        if (previousCount != null && previousCount > limitRequestPerTime.limitCount) {
-            return RateLimitResponse(
+        if (previousCount != null && previousCount >= limitRequestPerTime.limitCount) {
+            val ttlSeconds = redisTemplate.getExpire(key, TimeUnit.SECONDS)
+
+            val retryAfter = if (ttlSeconds > 0) {
+                LocalDateTime.now().plusSeconds(ttlSeconds)
+            } else {
+                null
+            }
+
+            return RateLimitResponse.fail(
                 false,
                 limitRequestPerTime.limitCount,
-                0L
+                0L,
+                retryAfter
             )
         }
 
@@ -27,7 +38,7 @@ class RedisRateLimiter(
 
         val currentCount = redisTemplate.opsForValue().increment(key)!!
 
-        return RateLimitResponse(
+        return RateLimitResponse.success(
             true,
             limitRequestPerTime.limitCount,
             limitRequestPerTime.limitCount - currentCount

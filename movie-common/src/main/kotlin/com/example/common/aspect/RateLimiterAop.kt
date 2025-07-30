@@ -17,7 +17,7 @@ import org.springframework.web.context.request.ServletRequestAttributes
 @Aspect
 @Component
 class RateLimiterAop(
-    @Qualifier("RedisLuaRateLimiter") private val rateLimiter: RateLimiter
+    @Qualifier("Bucket4jRateLimiter") private val rateLimiter: RateLimiter
 ) {
 
     @Around("@annotation(com.example.common.annotation.LimitRequestPerTime)")
@@ -49,6 +49,7 @@ class RateLimiterAop(
         response?.apply {
             setHeader("X-RateLimit-Limit", rateLimitResponse.limit.toString())
             setHeader("X-RateLimit-Remaining", rateLimitResponse.remaining.toString())
+            setHeader("X-RateLimit-RetryAfter", rateLimitResponse.retryAfter.toString())
         }
     }
 
