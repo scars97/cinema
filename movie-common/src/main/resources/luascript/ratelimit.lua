@@ -1,16 +1,22 @@
-local key = KEYS[1] -- 제한 키
-local limitCount = tonumber(ARGV[1]) -- 요청 허용 횟수
-local ttl = tonumber(ARGV[2]) -- ttl 값
+local key = KEYS[1]
+local limit = ARGV[1]
+local retryAfter = ARGV[2]
+local ttlSeconds = ARGV[3]
 
-local current = redis.call('GET', key)
-if current then
-	current = tonumber(current)
-	if current >= limitCount then
-	    return {0, limitCount, 0}
-    end
-else
-    redis.call('SET', key, 0, 'EX', ttl)
+local remaining = redis.call("HGET", key, "remaining")
+if remaining == false then
+  -- 초기화
+  redis.call("HSET", key, "remaining", limit - 1)
+  redis.call("HSET", key, "retryAfter", retryAfter)
+  redis.call("EXPIRE", key, ttlSeconds)
+  return {1, limit - 1, 0} -- 성공, 남은 요청, retryAfter 0 전달
 end
 
-local newCount = redis.call('INCR', key)
-return {1, limitCount, limitCount - newCount}
+remaining = tonumber(remaining)
+if remaining <= 0 then
+  local getRetryAfter = redis.call("HGET", key, "retryAfter")
+  return {0, 0, getRetryAfter}  -- 실패, 남은 요청 0, retryAfter 전달
+else
+  redis.call("HINCRBY", key, "remaining", -1)
+  return {1, remaining - 1, 0}  -- 성공, 남은 요청, retryAfter 0 전달
+end

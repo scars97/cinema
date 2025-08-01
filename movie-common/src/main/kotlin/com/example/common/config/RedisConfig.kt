@@ -1,6 +1,5 @@
 package com.example.common.config
 
-import com.example.common.model.RateLimitResponse
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator
