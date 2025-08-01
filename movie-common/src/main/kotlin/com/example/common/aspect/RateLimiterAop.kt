@@ -17,7 +17,7 @@ import org.springframework.web.context.request.ServletRequestAttributes
 @Aspect
 @Component
 class RateLimiterAop(
-    @Qualifier("Bucket4jRateLimiter") private val rateLimiter: RateLimiter
+    @Qualifier("RedisRateLimiter") private val rateLimiter: RateLimiter
 ) {
 
     @Around("@annotation(com.example.common.annotation.LimitRequestPerTime)")
