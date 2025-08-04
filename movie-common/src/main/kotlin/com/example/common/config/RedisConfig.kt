@@ -55,9 +55,9 @@ class RedisConfig(
     }
 
     @Bean
-    fun rateLimitScript(): RedisScript<Boolean> {
+    fun rateLimitScript(): RedisScript<List<*>> {
         val script = ClassPathResource("luascript/ratelimit.lua")
-        return RedisScript.of(script, Boolean::class.java)
+        return RedisScript.of(script, List::class.java)
     }
 
     @Bean
